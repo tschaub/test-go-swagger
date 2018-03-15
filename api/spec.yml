@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  description: Testing go-swagger
+  title: test-go-swagger
+  version: 1.0.0
+consumes:
+  - application/json
+produces:
+  - application/json
+schemes:
+  - http
+paths:
+  /test:
+    post:
+      summary: Create a new animation.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              foo: 
+                type: boolean
+                default: true
+              bar:
+                type: integer
+                default: 42
+              bam:
+                type: string
+                default: boom
+      responses:
+        '200':
+          description: It works
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
