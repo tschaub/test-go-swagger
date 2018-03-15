@@ -6,12 +6,11 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
-
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // PostTestParamsBody post test params body
@@ -24,30 +23,35 @@ type PostTestParamsBody struct {
 	// bar
 	Bar int64 `json:"bar,omitempty"`
 
+	// chicken
+	// Required: true
+	Chicken *float64 `json:"chicken"`
+
 	// foo
 	Foo bool `json:"foo,omitempty"`
-}
-
-func (m *PostTestParamsBody) UnmarshalJSON(b []byte) error {
-	type PostTestParamsBodyAlias PostTestParamsBody
-	var t PostTestParamsBodyAlias
-	if err := json.Unmarshal([]byte("{\"bam\":\"boom\",\"bar\":42,\"foo\":true}"), &t); err != nil {
-		return err
-	}
-	if err := json.Unmarshal(b, &t); err != nil {
-		return err
-	}
-	*m = PostTestParamsBody(t)
-	return nil
 }
 
 // Validate validates this post test params body
 func (m *PostTestParamsBody) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateChicken(formats); err != nil {
+		// prop
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *PostTestParamsBody) validateChicken(formats strfmt.Registry) error {
+
+	if err := validate.Required("chicken", "body", m.Chicken); err != nil {
+		return err
+	}
+
 	return nil
 }
 

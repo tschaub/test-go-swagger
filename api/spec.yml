@@ -20,10 +20,6 @@ paths:
             type: object
             required:
               - chicken
-            default:
-              foo: true
-              bar: 42
-              bam: boom
             properties:
               chicken:
                 type: number
