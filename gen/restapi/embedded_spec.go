@@ -39,18 +39,20 @@ func init() {
             "in": "body",
             "schema": {
               "type": "object",
+              "default": {
+                "bam": "boom",
+                "bar": 42,
+                "foo": true
+              },
               "properties": {
                 "bam": {
-                  "type": "string",
-                  "default": "boom"
+                  "type": "string"
                 },
                 "bar": {
-                  "type": "integer",
-                  "default": 42
+                  "type": "integer"
                 },
                 "foo": {
-                  "type": "boolean",
-                  "default": true
+                  "type": "boolean"
                 }
               }
             }

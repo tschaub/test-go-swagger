@@ -18,16 +18,17 @@ paths:
           in: body
           schema:
             type: object
+            default:
+              foo: true
+              bar: 42
+              bam: boom
             properties:
               foo: 
                 type: boolean
-                default: true
               bar:
                 type: integer
-                default: 42
               bam:
                 type: string
-                default: boom
       responses:
         '200':
           description: It works

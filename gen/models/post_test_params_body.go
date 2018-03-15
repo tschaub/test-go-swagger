@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
+
 	strfmt "github.com/go-openapi/strfmt"
 
 	"github.com/go-openapi/errors"
@@ -17,13 +19,26 @@ import (
 type PostTestParamsBody struct {
 
 	// bam
-	Bam *string `json:"bam,omitempty"`
+	Bam string `json:"bam,omitempty"`
 
 	// bar
-	Bar *int64 `json:"bar,omitempty"`
+	Bar int64 `json:"bar,omitempty"`
 
 	// foo
-	Foo *bool `json:"foo,omitempty"`
+	Foo bool `json:"foo,omitempty"`
+}
+
+func (m *PostTestParamsBody) UnmarshalJSON(b []byte) error {
+	type PostTestParamsBodyAlias PostTestParamsBody
+	var t PostTestParamsBodyAlias
+	if err := json.Unmarshal([]byte("{\"bam\":\"boom\",\"bar\":42,\"foo\":true}"), &t); err != nil {
+		return err
+	}
+	if err := json.Unmarshal(b, &t); err != nil {
+		return err
+	}
+	*m = PostTestParamsBody(t)
+	return nil
 }
 
 // Validate validates this post test params body
