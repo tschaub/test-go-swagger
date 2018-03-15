@@ -18,11 +18,15 @@ paths:
           in: body
           schema:
             type: object
+            required:
+              - chicken
             default:
               foo: true
               bar: 42
               bam: boom
             properties:
+              chicken:
+                type: number
               foo: 
                 type: boolean
               bar:
